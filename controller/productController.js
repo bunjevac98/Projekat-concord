@@ -12,7 +12,6 @@ module.exports.createProduct = async (req, res, next) => {
         console.error('Error creating product:', error);
         res.status(500).json({ error: 'Failed to create product' });
     }
-    //verovatno neki redirekt
 }
 
 module.exports.getProduct = async (req, res, next) => {
@@ -21,7 +20,6 @@ module.exports.getProduct = async (req, res, next) => {
         if (products.length === 0) {
             return res.status(404).json({ message: 'No product found' });
         }
-        // Send response with the array of users
         res.json(products);
     } catch (error) {
         console.error('Error fetching products:', error);

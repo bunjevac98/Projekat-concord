@@ -46,10 +46,9 @@ module.exports.updateUser = async (req, res, next) => {
         const user = await User.findById(id)
         if (!user) {
             return res.status(404).json({ message: "User not found" })
-
         }
         if ("password" in updates && updates.password !== user.password) {
-            const hashedPassword = await bcrypt.hash(updates.password, 10); // You can adjust the salt rounds (e.g., 10)
+            const hashedPassword = await bcrypt.hash(updates.password, 10); 
             updates.password = hashedPassword;
         }
         const updatedUser = await User.findByIdAndUpdate(id, updates, { new: true });
@@ -74,7 +73,6 @@ module.exports.updateUser = async (req, res, next) => {
         res.status(500).json({ error: 'Failed to update user' });
     }*/
 }
-//Delete all user
 //This can do just admin
 module.exports.deleteUser = async (req, res, next) => {
     const { id } = req.params;

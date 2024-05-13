@@ -14,7 +14,6 @@ module.exports.signup = async (req, res, next) => {
         if (existingUser) {
             return res.status(400).json({ message: 'Username or email already exists' });
         }
-        // Create a new user instance
         const newUser = new User({
             name,
             surname,
@@ -30,7 +29,6 @@ module.exports.signup = async (req, res, next) => {
         const salt = await bcrypt.genSalt(10);
         newUser.password = await bcrypt.hash(password, salt);
 
-        // Save the user to the database
         await newUser.save();
 
         res.status(201).json({ message: 'User created successfully' });
@@ -43,20 +41,19 @@ module.exports.signup = async (req, res, next) => {
 module.exports.login = async (req, res) => {
     const { username, password } = req.body
     try {
-        //Find user
         const user = await User.findOne({ username });
         if (!user) {
             return res.status(404).json({ message: "User not found" })
         }
-        
+
         //Now validating password
         const isMatch = await bcrypt.compare(password, user.password);
-        //if exists
+
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid credentials" })
         }
-        
-        //CREATING JWT TOKEN(OVDE MOZDA U ENV FAJLSTAVITI SIKRET PITATI)
+
+        //Creating JWT token
         const token = jwt.sign({ userId: user._id }, jwt_secret, { expiresIn: "1h" })
         res.json({ token });
     } catch (error) {
