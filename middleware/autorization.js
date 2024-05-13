@@ -8,7 +8,6 @@ module.exports.isAdmin = async (req, res, next) => {
     if (user.role === 'Admin') {
         next();
     } else {
-        // User is not authorized to access this resource
         res.status(403).json({ message: 'Unauthorized - Admin access required' });
     }
 }

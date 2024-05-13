@@ -18,7 +18,7 @@ module.exports.authenticate = (req, res, next) => {
 
         req.userId = decoded.userId;
 
-        next();//ovaj next je bitan vrv da prelazi na sledeci midelware
+        next();
     } catch (error) {
         console.error('Error verifying token:', error);
         res.status(401).json({ message: 'Invalid token' });

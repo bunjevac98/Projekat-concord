@@ -47,7 +47,7 @@ function totalPriceCalculator(items) {
 
     return totalPrice;
 }
-//samo Admin
+
 module.exports.readAllTransaction = async (req, res, next) => {
     try {
         const transactions = await Transaction.find();
@@ -62,7 +62,7 @@ module.exports.readAllTransaction = async (req, res, next) => {
     }
 }
 
-//User-->His own transactions
+
 module.exports.readYourTransaction = async (req, res, next) => {
     const userId = req.body.userId;
     try {
@@ -80,11 +80,7 @@ module.exports.readYourTransaction = async (req, res, next) => {
         res.status(500).json({ error: 'Failed to fetch transactions' });
     }
 }
-//Samo admin
-module.exports.updateTransaction = async (req, res, next) => {
 
-
-}
 
 module.exports.deleteTransaction = async (req, res, next) => {
     const { id } = req.params;
